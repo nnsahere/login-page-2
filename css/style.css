@@ -1,0 +1,491 @@
+:root {
+  --ink: #1c0a2e;          /* teks utama (plum gelap) */
+  --muted: #5b4b6e;        /* teks sekunder */
+  --line: #7a6a8c;         /* border input (kontras UI >= 3:1) */
+  --bg: #ffffff;
+  --purple: #5b21b6;       /* aksen utama: link, fokus */
+  --purple-dark: #4c1d95;
+  --magenta: #b0124f;
+  --orange: #ff6a2b;       /* dekoratif saja */
+  --plum: #2a0a63;
+  --radius: 8px;
+  --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--purple);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--magenta);
+  text-decoration-thickness: 2px;
+}
+
+/* Fokus keyboard yang jelas (WCAG 2.4.7) */
+:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 2px;
+}
+
+/* ---------- Layout utama (mobile: tumpuk vertikal) ---------- */
+.auth {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- Kolom kiri: artwork ---------- */
+.auth__art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  min-height: 240px;
+  color: #ffffff;
+  background:
+    linear-gradient(180deg, rgba(20, 5, 40, 0.35), rgba(20, 5, 40, 0.35)),
+    url("../img/artwork.svg") center / cover no-repeat;
+  background-color: var(--plum);
+  overflow: hidden;
+}
+
+.art__tag {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--purple);          /* kontras 8:1 */
+  border: 2px solid #ffffff;
+}
+
+.art__title {
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  /* bayangan keras ala huruf 3D pixel di poster */
+  text-shadow: 3px 3px 0 var(--purple), 6px 6px 0 rgba(20, 5, 40, 0.5);
+}
+
+.art__title span {
+  color: #ffd9c2;
+}
+
+.art__slogan {
+  margin: 0;
+  max-width: 30ch;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-shadow: 0 1px 6px rgba(20, 5, 40, 0.8);
+}
+
+.art__perks {
+  display: none;              /* tampil mulai tablet */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.art__perks li {
+  position: relative;
+  display: inline-block;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.9rem 0.5rem 2.1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: rgba(20, 5, 40, 0.8);   /* chip gelap, kontras aman */
+  border: 2px solid var(--purple);
+}
+
+/* kotak pixel kecil sebagai bullet (positioning) */
+.art__perks li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.8rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  transform: translateY(-50%);
+  background: var(--orange);
+}
+
+/* ---------- Kolom kanan: panel form ---------- */
+.auth__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.5rem;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* dekorasi kotak pixel pojok panel */
+.auth__panel::before,
+.auth__panel::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+
+.auth__panel::before {
+  top: 0;
+  right: 0;
+  background: var(--purple);
+}
+
+.auth__panel::after {
+  bottom: 0;
+  left: 0;
+  background: var(--orange);
+}
+
+.panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.panel__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.panel__logo:hover {
+  color: var(--purple);
+}
+
+.panel__info {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.panel__body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.panel__foot {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.panel__foot p {
+  margin: 0;
+}
+
+/* ---------- Form ---------- */
+.form {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.form__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--magenta);              /* kontras 6.9:1 */
+}
+
+.form__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.form__lead {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* Tombol umum */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn--sso {
+  color: var(--ink);
+  background: #ffffff;
+  border: 2px solid var(--line);
+}
+
+.btn--sso:hover {
+  background: #f6f1fc;
+  border-color: var(--purple);
+}
+
+.btn--primary {
+  margin-top: 1.25rem;
+  color: #ffffff;
+  background: linear-gradient(90deg, var(--purple), var(--magenta));
+  border: 2px solid var(--plum);
+  box-shadow: 4px 4px 0 var(--orange);   /* efek blok pixel */
+}
+
+.btn--primary:hover {
+  background: linear-gradient(90deg, var(--purple-dark), #8f0e40);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--orange);
+}
+
+/* Divider "or" dengan garis kiri-kanan (positioning) */
+.divider {
+  position: relative;
+  margin: 1.5rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.divider span {
+  position: relative;            /* di atas garis */
+  display: inline-block;
+  padding: 0 1rem;
+  background: var(--bg);
+}
+
+/* Field */
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.field__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.link {
+  margin-bottom: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.field__control {
+  position: relative;
+}
+
+input[type="text"],
+input[type="password"] {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: #ffffff;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+  border-color: var(--ink);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: 3px solid var(--purple);
+  outline-offset: 1px;
+  border-color: var(--purple);
+}
+
+/* Ruang untuk tombol mata di dalam input password */
+.field__control input {
+  padding-right: 3.25rem;
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--purple);
+  background: #f1eaf9;
+}
+
+/* Checkbox */
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.check input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--purple);
+  cursor: pointer;
+}
+
+.check label {
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+/* ==========================================================
+   Tablet & di atas (>= 768px)
+   ========================================================== */
+@media (min-width: 768px) {
+  .auth__art {
+    min-height: 320px;
+    padding: 2rem;
+  }
+
+  .art__title {
+    font-size: 3rem;
+  }
+
+  .art__slogan {
+    font-size: 1.125rem;
+  }
+
+  .art__perks {
+    display: block;
+  }
+
+  .auth__panel {
+    padding: 2rem;
+  }
+}
+
+/* ==========================================================
+   Desktop (>= 1024px): split-screen dua kolom
+   ========================================================== */
+@media (min-width: 1024px) {
+  .auth {
+    flex-direction: row;
+  }
+
+  .auth__art {
+    flex: 0 0 48%;
+    min-height: 100vh;
+    padding: 2.5rem;
+  }
+
+  .art__title {
+    font-size: 4rem;
+  }
+
+  .auth__panel {
+    flex: 1;
+    padding: 2rem 3rem;
+  }
+
+  .form {
+    max-width: 24rem;
+  }
+
+  .form__title {
+    font-size: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

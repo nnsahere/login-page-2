@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | ITechno Cup 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth">
+
+    <!-- Kolom kiri: artwork branding lomba -->
+    <section class="auth__art" aria-label="About ITechno Cup 2026">
+      <p class="art__tag">International UI/UX Design Competition</p>
+
+      <div class="art__content">
+        <p class="art__title">ITechno <span>Cup</span> 2026</p>
+        <p class="art__slogan">Adaptive innovation for a future-ready digital society.</p>
+      </div>
+
+      <ul class="art__perks" aria-label="Why join ITechno Cup">
+        <li>International recognition &amp; certificates</li>
+        <li>Global networking with tech enthusiasts</li>
+        <li>Grand prize pool</li>
+      </ul>
+    </section>
+
+    <!-- Kolom kanan: formulir login -->
+    <section class="auth__panel" aria-labelledby="judul-login">
+      <header class="panel__top">
+        <p class="panel__info">Guidelines &amp; info: <a href="https://itechnocup.id">itechnocup.id</a></p>
+      </header>
+
+      <div class="panel__body">
+        <form class="form" action="#" method="post">
+          <p class="form__eyebrow">Participant Portal</p>
+          <h1 id="judul-login" class="form__title">Welcome back, innovator!</h1>
+          <p class="form__lead">Sign in to continue your journey to the Grand Final.</p>
+
+          <button type="button" class="btn btn--sso" aria-label="Sign in with Google">
+            <img src="img/google.svg" alt="" width="20" height="20">
+            <span>Sign in with Google</span>
+          </button>
+
+          <div class="divider" role="separator" aria-label="or">
+            <span>or</span>
+          </div>
+
+          <div class="field">
+            <label for="email">Username or Email</label>
+            <input type="text" id="email" name="email" autocomplete="username" required>
+          </div>
+
+          <div class="field">
+            <div class="field__row">
+              <label for="password">Password</label>
+              <a class="link" href="#">Forgot Password?</a>
+            </div>
+            <div class="field__control">
+              <input type="password" id="password" name="password" autocomplete="current-password" required>
+              <button type="button" class="toggle" id="togglePassword" aria-label="Show password" aria-pressed="false">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember Me</label>
+          </div>
+
+          <button type="submit" class="btn btn--primary">Sign In</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
